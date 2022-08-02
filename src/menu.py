@@ -139,7 +139,7 @@ def menu():
 		token = open("data/token.txt","r").read()
 		cok = open("data/cookie.txt","r").read()
 		cookie = {"cookie":cok}
-		data = ses.get(f"https://graph.facebook.com/me?fields=name,id,birthday &access_token={token}",cookies=cookie).json()
+		data = ses.get(f"https://graph.facebook.com/me?fields=id,name&access_token",cookies=cookie).json()
 		nama = data["name"]
 		uid = data["id"]
 		ttl = data["birthday"]
@@ -148,7 +148,7 @@ def menu():
 		Login.login()
 	logo()
 	akmj = []
-	email = "namamu@gmail.com"
+	email = "naufalarky75@gmail.com"
 	joined = "24 Maret 2022"
 	expired = "24 Maret 2023"
 	akmj.append(Panel(f"{P2}Nama : {nama} \nID : {uid} \nTgl Lahir : {ttl}",width=37,title=f"{P2}data account",style=f"{color_table}"))
