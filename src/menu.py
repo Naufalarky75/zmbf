@@ -139,7 +139,7 @@ def menu():
 		token = open("data/token.txt","r").read()
 		cok = open("data/cookie.txt","r").read()
 		cookie = {"cookie":cok}
-		data = ses.get(f"https://graph.facebook.com/me?fields=id,name&access_token",cookies=cookie).json()
+		data = ses.get('https://graph.facebook.com/me?fields=id,name&access_token='+tokenku[0], cookies={'cookie':cok}).json()
 		nama = data["name"]
 		uid = data["id"]
 		ttl = data["birthday"]
