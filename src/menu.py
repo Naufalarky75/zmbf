@@ -142,7 +142,6 @@ def menu():
 		data = ses.get('https://graph.facebook.com/me?fields=id,name&access_token='+tokenku[0], cookies={'cookie':cok}).json()
 		nama = data["name"]
 		uid = data["id"]
-		ttl = data["birthday"]
 	except (FileNotFoundError,KeyError,IOError):
 		delete()
 		Login.login()
