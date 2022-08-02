@@ -65,11 +65,6 @@ id_groups = []
 data = {}
 ugent1, ugent2 = [],[]
 datt = []
-###----------[ CHECK STATUS SCRIPT ]---------- ###
-try:
-except requests.exceptions.ConnectionError:
-	prints(Panel(f"""{P2}connection problem, please check your connection again""",width=80,style=f"{color_table}"))
-	sys.exit()
 	
 ###----------[ CHECK THEME COLOR ]---------- ###
 try:
