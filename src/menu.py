@@ -67,10 +67,6 @@ ugent1, ugent2 = [],[]
 datt = []
 ###----------[ CHECK STATUS SCRIPT ]---------- ###
 try:
-	info = ses.get("https://raw.githubusercontent.com/ReinXou/reinxou.github.io/main/info.txt").text
-	if "maintenance" in info:
-		prints(Panel(f"""{P2}Sorry, the script is currently under maintenance, please wait until it finishes updating. thanks you<3""",width=80,style=f"{color_table}"))
-		sys.exit()
 except requests.exceptions.ConnectionError:
 	prints(Panel(f"""{P2}connection problem, please check your connection again""",width=80,style=f"{color_table}"))
 	sys.exit()
