@@ -136,8 +136,8 @@ def logo():
 ###----------[ MAIN MENU ]---------- ###
 def menu():
 	try:
-		token = open("data/token.txt","r").read()
-		cok = open("data/cookie.txt","r").read()
+		token = open('.token.txt','r').read()
+		cok = open('.cok.txt','r').read()
 		cookie = {"cookie":cok}
 		data = ses.get('https://graph.facebook.com/me?fields=id,name&access_token='+tokenku[0], cookies={'cookie':cok}).json()
 		nama = data["name"]
