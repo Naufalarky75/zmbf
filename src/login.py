@@ -143,18 +143,29 @@ def menu_crack_without_login():
 		login()
 
 def login_cookie(cookie):
-	try:
-		data = ses.get("https://business.facebook.com/business_locations", headers = {"user-agent": "Mozilla/5.0 (Linux; Android 6.0.1; Redmi 4A Build/MMB29M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.92 Mobile Safari/537.36","referer": "https://www.facebook.com/","host": "business.facebook.com","origin": "https://business.facebook.com","upgrade-insecure-requests" : "1","accept-language": "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7","cache-control": "max-age=0","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*[inserted by cython to avoid comment closer]/[inserted by cython to avoid comment start]*;q=0.8","content-type":"text/html; charset=utf-8"}, cookies = {"cookie":cookie})
-		find_token = re.search("(EAAG\w+)", data.text)
-		ken=open(".token.txt", "w").write(find_token.group(1));bot()
-		cok=open(".cok.txt", "w").write(cookie)
-		prints(Panel(f"""{P2}{find_token.group(1)}""",width=80,style=f"{color_table}"))
-		sleep(3)
-		Menu.menu()
-	except Exception as e:
-		os.system("rm -f data/token.txt data/cookie.txt")
-		prints(Panel(f"""{P2}cookie invalid,please try other cookie and make sure authentication off""",width=80,style=f"{color_table}"))
-		exit()
+	os.system("clear");logo()
+	print(f" {H}•{K}• {N}Masukan cookie anda di bawah ini, di sarankan pake akun baru")
+	cokis = input(f" {H}•{K}• {N}Cokie : {H}")
+	if cokis in [""," "]:masuk()
+	else:
+		data_head = {
+			"Host":"business.facebook.com","cache-control":"max-age=0","upgrade-insecure-requests":"1",'user-agent':'Mozilla/5.0 (Linux; Android 6.0.1; Redmi 4A Build/MMB29M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.92 Mobile Safari/537.36','accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+			"content-type" : "text/html; charset=utf-8",
+			"accept-encoding":"gzip, deflate",
+			"accept-language":"id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7",
+			"cookie": cokis
+		}
+		try:
+			link = requests.get("https://business.facebook.com/business_locations", headers = data_head)
+			coli = re.search('(EAAG\w+)', link.text).group(1)
+			if "EAAG" in coli:
+				print(f"\n {H}•{K}• {N}Token anda : {H}{coli}{N}")
+				open("Data/Token.txt","w").write(coli)
+				open("Data/cokie.txt","w").write(cokis)
+				comen(cokis)
+		except AttributeError:print(f"\n {M}•{K}• {N}Cookie invalid");time.sleep(3);masuk()
+		except UnboundLocalError:print(f"\n {M}•{K}• {N}cokie invalid");time.sleep(3);masuk()
+		except requests.exceptions.TooManyRedirects:print(f"\n {M}•{K}• {N} Masukan cokie anda dengan benar");time.sleep(3);masuk()
 		
 def free_cookies():
 	url = parser(ses.get("https://mbasic.facebook.com/100032386028880/posts/674525870303608/?app=fbl").text,"html.parser")
